@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Component</title>
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+    <header class="main-header">
+        <!-- Üst Banner -->
+        <div class="top-banner">
+            <div class="banner-content">
+                <span>BLACK WEEK SALE | %70'e VARAN İNDİRİM</span>
+            </div>
+        </div>
+
+        <!-- Ana Header -->
+        <div class="header-container">
+            <div class="header-wrapper">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">P-VSN</a>
+                </div>
+
+                <!-- Navigasyon Menüsü -->
+                <nav class="main-nav">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">ANASAYFA</a></li>
+                        <li class="dropdown">
+                            <a href="#">TÜM ÜRÜNLER <span>▼</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">T-SHIRT</a></li>
+                                <li><a href="#">HOODIE</a></li>
+                                <li><a href="#">MONT</a></li>
+                                <li><a href="#">PANTOLON</a></li>
+                                <li><a href="#">ŞAPKA</a></li>
+                                <li><a href="#">FORMA</a></li>
+                                <li><a href="#">ÇORAP</a></li>
+                                <li><a href="#">ÇANTA</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">MARKALAR <span>▼</span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">SUPREME</a></li>
+                                <li><a href="#">PRAISE</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Sağ Taraf İkonlar -->
+                <div class="header-actions">
+                    <a href="#" class="cart-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </a>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobil Menü -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="index.html">ANASAYFA</a></li>
+                <li><a href="#">TÜM ÜRÜNLER</a></li>
+                <li><a href="#">MARKALAR</a></li>
+                <li><a href="contact.html">İLETİŞİM</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <script>
+        // Mobil menü toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuToggle && mobileMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    mobileMenuToggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

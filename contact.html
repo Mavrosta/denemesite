@@ -1,569 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location & Contact - Car Guys Hub</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: #ffffff;
-            color: #333;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-        }
-        header {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .logo {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #ef233c 0%, #d90429 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .logo svg {
-            width: 30px;
-            height: 30px;
-            fill: white;
-        }
-        header h1 {
-            font-size: 1.8em;
-            color: #333;
-            margin: 0;
-            font-weight: 700;
-        }
-        nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        nav a {
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 0;
-            position: relative;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #ef233c;
-        }
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #ef233c;
-            transition: width 0.3s;
-        }
-        nav a:hover::after {
-            width: 100%;
-        }
-        .nav-dropdown {
-            position: relative;
-        }
-        .nav-dropdown:hover .dropdown-menu {
-            display: block;
-        }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: #fff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            padding: 10px 0;
-            min-width: 200px;
-            margin-top: 10px;
-        }
-        .dropdown-menu a {
-            display: block;
-            padding: 10px 20px;
-            color: #333;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-        .dropdown-menu a:hover {
-            background: #f5f5f5;
-            color: #ef233c;
-        }
-        .cta-button {
-            background: #ef233c;
-            color: #fff;
-            padding: 10px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-        .cta-button:hover {
-            background: #d90429;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2.5em;
-            color: #333;
-            margin-bottom: 50px;
-            font-weight: 700;
-        }
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        .card h2 {
-            color: #333;
-            font-size: 2em;
-            margin-bottom: 30px;
-            font-weight: 600;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #ef233c;
-        }
-        .contact-info {
-            list-style: none;
-            padding: 0;
-        }
-        .contact-info li {
-            margin-bottom: 30px;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .contact-info .icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #ef233c 0%, #d90429 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .contact-info .icon svg {
-            width: 28px;
-            height: 28px;
-            fill: white;
-        }
-        .contact-info .details {
-            flex: 1;
-        }
-        .contact-info .details h3 {
-            color: #333;
-            margin-bottom: 8px;
-            font-size: 1.3em;
-            font-weight: 600;
-        }
-        .contact-info .details p {
-            color: #666;
-            line-height: 1.8;
-        }
-        .contact-info .details a {
-            color: #ef233c;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .contact-info .details a:hover {
-            color: #d90429;
-            text-decoration: underline;
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            color: #333;
-            font-weight: 500;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #ef233c;
-        }
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        .submit-btn {
-            background: #ef233c;
-            color: #fff;
-            padding: 14px 35px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1em;
-            transition: background 0.3s;
-            width: 100%;
-        }
-        .submit-btn:hover {
-            background: #d90429;
-        }
-        .map-container {
-            background: #fff;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 60px;
-        }
-        .map-container h2 {
-            color: #333;
-            font-size: 2em;
-            margin-bottom: 30px;
-            font-weight: 600;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #ef233c;
-        }
-        .map-placeholder {
-            width: 100%;
-            height: 450px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #ddd;
-            position: relative;
-            overflow: hidden;
-        }
-        .map-placeholder::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ef233c"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>') center/150px no-repeat;
-            opacity: 0.1;
-        }
-        .map-placeholder p {
-            position: relative;
-            z-index: 1;
-            color: #666;
-            font-size: 1.2em;
-            text-align: center;
-            padding: 20px;
-        }
-        footer {
-            background: #2c3e50;
-            color: #fff;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .footer-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-        .footer-info h4 {
-            margin-bottom: 15px;
-            color: #ef233c;
-        }
-        .footer-info p,
-        .footer-info a {
-            color: #bdc3c7;
-            text-decoration: none;
-            line-height: 1.8;
-        }
-        .footer-info a:hover {
-            color: #ef233c;
-        }
-        .footer-bottom {
-            border-top: 1px solid #34495e;
-            padding-top: 20px;
-            margin-top: 20px;
-            color: #95a5a6;
-        }
-        .social-media {
-            text-align: center;
-            margin: 30px 0;
-        }
-        .social-media h4 {
-            color: #ef233c;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-        }
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-        }
-        .social-icon:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .social-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: white;
-        }
-        .social-icon.whatsapp {
-            background: #25D366;
-        }
-        .social-icon.instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-        }
-        .social-icon.facebook {
-            background: #1877F2;
-        }
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 20px;
-            }
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            .section-title {
-                font-size: 2em;
-            }
-        }
-    </style>
+    <title>İletişim - P-VSN</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo-container">
-                <div class="logo">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
-                    </svg>
-                </div>
-                <h1>Car Guys Hub</h1>
-            </div>
-            <nav>
-                <a href="Untitled-1.html#home">Home</a>
-                <a href="Untitled-1.html#about">About</a>
-                <div class="nav-dropdown">
-                    <a href="Untitled-1.html#services">Services +</a>
-                    <div class="dropdown-menu">
-                        <a href="Untitled-1.html#featured-cars">Featured Cars</a>
-                        <a href="Untitled-1.html#submit-car">Submit Your Car</a>
-                        <a href="Untitled-1.html#forum">Forum</a>
-                    </div>
-                </div>
-                <a href="Untitled-1.html#blog">Blog</a>
-                <a href="Untitled-1.html#parts">Parts</a>
-                <a href="Untitled-1.html#works">Our Works</a>
-                <a href="contact.html" class="cta-button">Contact Us</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
 
-    <div class="container">
-        <h2 class="section-title">Location & Contact</h2>
-        
-        <div class="content-grid">
-            <div class="card">
-                <h2>Contact Information</h2>
-                <ul class="contact-info">
-                    <li>
-                        <div class="icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                            </svg>
-                        </div>
-                        <div class="details">
-                            <h3>Address</h3>
-                            <p>1234 Speedway Boulevard<br>Los Angeles, CA 90001<br>United States</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                            </svg>
-                        </div>
-                        <div class="details">
-                            <h3>Phone</h3>
-                            <p><a href="tel:+1234567890">+1 (234) 567-890</a><br><a href="tel:+1234567891">+1 (234) 567-891</a></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                            </svg>
-                        </div>
-                        <div class="details">
-                            <h3>Email</h3>
-                            <p><a href="mailto:info@carguyshub.com">info@carguyshub.com</a><br><a href="mailto:support@carguyshub.com">support@carguyshub.com</a></p>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="icon">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                            </svg>
-                        </div>
-                        <div class="details">
-                            <h3>Business Hours</h3>
-                            <p>Monday - Friday: 9:00 AM - 7:00 PM<br>Saturday: 10:00 AM - 6:00 PM<br>Sunday: Closed</p>
-                        </div>
-                    </li>
-                </ul>
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-header">
+                <h1>İLETİŞİM</h1>
+                <p>Bizimle iletişime geçin, sorularınızı yanıtlayalım</p>
             </div>
-            <div class="card">
-                <h2>Get in Touch</h2>
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Subject</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
-            </div>
-        </div>
 
-        <div class="map-container">
-            <h2>Find Us</h2>
-            <div class="map-placeholder">
-                <p>📍 Interactive Map Location<br><br>1234 Speedway Boulevard<br>Los Angeles, CA 90001</p>
-            </div>
-            <p style="margin-top: 20px; color: #666; text-align: center;">
-                <em>Note: You can embed a Google Maps iframe here by replacing this placeholder with the embed code.</em>
-            </p>
-        </div>
-    </div>
+            <div class="contact-content">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2>Bize Ulaşın</h2>
+                    
+                    <div class="contact-info-item">
+                        <h3>Adres</h3>
+                        <p>
+                            Örnek Mahallesi<br>
+                            Örnek Sokak No: 123<br>
+                            İstanbul, Türkiye
+                        </p>
+                    </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <div>
-                    <h4>Contact Information</h4>
-                    <p>1234 Speedway Boulevard</p>
-                    <p>Los Angeles, CA 90001</p>
-                    <p>United States</p>
+                    <div class="contact-info-item">
+                        <h3>Telefon</h3>
+                        <p>
+                            <a href="tel:+905551234567">+90 (555) 123 45 67</a><br>
+                            <a href="tel:+902121234567">+90 (212) 123 45 67</a>
+                        </p>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <h3>E-posta</h3>
+                        <p>
+                            <a href="mailto:info@p-vsn.com">info@p-vsn.com</a><br>
+                            <a href="mailto:destek@p-vsn.com">destek@p-vsn.com</a>
+                        </p>
+                    </div>
+
+                    <div class="contact-info-item">
+                        <h3>Çalışma Saatleri</h3>
+                        <p>
+                            Pazartesi - Cuma: 09:00 - 18:00<br>
+                            Cumartesi: 10:00 - 16:00<br>
+                            Pazar: Kapalı
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h4>Phone</h4>
-                    <p><a href="tel:+1234567890">+1 (234) 567-890</a></p>
-                    <p><a href="tel:+1234567891">+1 (234) 567-891</a></p>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2>Mesaj Gönderin</h2>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ad Soyad *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-posta *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Konu *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Mesajınız *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit">GÖNDER</button>
+                        </div>
+
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
                 </div>
-                <div>
-                    <h4>Email</h4>
-                    <p><a href="mailto:info@carguyshub.com">info@carguyshub.com</a></p>
-                    <p><a href="mailto:support@carguyshub.com">support@carguyshub.com</a></p>
-                </div>
-            </div>
-            <div class="social-media">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
-                    <a href="https://wa.me/1234567890" target="_blank" class="social-icon whatsapp" title="WhatsApp">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/carguyshub" target="_blank" class="social-icon instagram" title="Instagram">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.facebook.com/carguyshub" target="_blank" class="social-icon facebook" title="Facebook">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Car Guys Hub. All rights reserved.</p>
             </div>
         </div>
-    </footer>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
 
     <script>
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
+        // Header ve Footer'ı yükle
+        function loadComponent(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const element = doc.querySelector('header') || doc.querySelector('footer') || doc.querySelector('section');
+                    if (element) {
+                        document.getElementById(elementId).innerHTML = element.innerHTML;
+                        
+                        // Script'leri çalıştır
+                        const scripts = element.querySelectorAll('script');
+                        scripts.forEach(script => {
+                            const newScript = document.createElement('script');
+                            newScript.textContent = script.textContent;
+                            document.body.appendChild(newScript);
+                        });
+                    }
+                })
+                .catch(error => console.error('Error loading component:', error));
+        }
+
+        // Sayfa yüklendiğinde header ve footer'ı yükle
+        document.addEventListener('DOMContentLoaded', function() {
+            loadComponent('header.html', 'header-placeholder');
+            loadComponent('footer.html', 'footer-placeholder');
+
+            // Contact form handler
+            const contactForm = document.getElementById('contactForm');
+            const formMessage = document.getElementById('formMessage');
             
-            // In a real application, you would send this data to a server
-            alert('Thank you for your message, ' + name + '! We will get back to you soon at ' + email + '.');
-            this.reset();
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Form verilerini al
+                    const formData = new FormData(this);
+                    const name = formData.get('name');
+                    const email = formData.get('email');
+                    const subject = formData.get('subject');
+                    const message = formData.get('message');
+                    
+                    // Basit validasyon
+                    if (name && email && subject && message) {
+                        formMessage.textContent = 'Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.';
+                        formMessage.className = 'form-message success';
+                        formMessage.style.display = 'block';
+                        this.reset();
+                        
+                        // Gerçek bir uygulamada burada form verilerini sunucuya gönderirsiniz
+                        console.log('Form Data:', {
+                            name: name,
+                            email: email,
+                            phone: formData.get('phone'),
+                            subject: subject,
+                            message: message
+                        });
+                    } else {
+                        formMessage.textContent = 'Lütfen tüm zorunlu alanları doldurun.';
+                        formMessage.className = 'form-message error';
+                        formMessage.style.display = 'block';
+                    }
+                    
+                    // Mesajı 5 saniye sonra gizle
+                    setTimeout(() => {
+                        formMessage.style.display = 'none';
+                    }, 5000);
+                });
+            }
         });
     </script>
 </body>
 </html>
+
